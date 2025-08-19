@@ -1,279 +1,392 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stock Mastery - Premium Investment Course</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .hero-gradient {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 50%, #3b82f6 100%);
-        }
-        .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-        }
-        .testimonial-card {
-            transition: all 0.3s ease;
-        }
-        .testimonial-card:hover {
-            transform: scale(1.03);
-        }
-        .pricing-card:hover {
-            transform: scale(1.02);
-        }
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-    </style>
+    <title>Đầu tư thông minh cùng KOL - Biến kiến thức thành lợi nhuận</title>
+    <meta name="description" content="Khóa học đầu tư chứng khoán từ A-Z với KOL uy tín. Cập nhật thị trường hàng ngày, hỗ trợ mở tài khoản chứng khoán miễn phí.">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="font-sans antialiased text-gray-800">
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-chart-line text-blue-600 text-2xl mr-2"></i>
-                        <span class="text-xl font-bold text-blue-600">StockMastery</span>
-                    </div>
-                </div>
-                <div class="hidden md:ml-6 md:flex md:items-center md:space-x-8">
-                    <a href="#features" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Features</a>
-                    <a href="#curriculum" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Curriculum</a>
-                    <a href="#testimonials" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Testimonials</a>
-                    <a href="#pricing" class="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium">Pricing</a>
-                    <a href="#register" class="bg-blue-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-blue-700 transition duration-300">Register Now</a>
-                </div>
-                <div class="md:hidden flex items-center">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-blue-600 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>KOL<span class="highlight">Invest</span></h2>
             </div>
-        </div>
-        <!-- Mobile menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-200">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#features" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Features</a>
-                <a href="#curriculum" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Curriculum</a>
-                <a href="#testimonials" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Testimonials</a>
-                <a href="#pricing" class="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Pricing</a>
-                <a href="#register" class="block w-full px-3 py-2 text-center text-base font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">Register Now</a>
+            
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">Giới thiệu</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#course" class="nav-link">Khóa học</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#videos" class="nav-link">Video</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#community" class="nav-link">Cộng đồng</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#register" class="nav-cta">Đăng ký ngay</a>
+                </li>
+            </ul>
+            
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero-gradient text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-28">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <div>
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">Master the Stock Market in 30 Days</h1>
-                    <p class="text-lg md:text-xl mb-8 opacity-90">Join our comprehensive investment course and learn how to build wealth through smart stock market strategies from industry experts.</p>
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#register" class="bg-white text-blue-600 px-8 py-3 rounded-md text-lg font-semibold hover:bg-gray-100 transition duration-300 text-center">Enroll Now</a>
-                        <a href="#features" class="border-2 border-white text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-white hover:text-blue-600 transition duration-300 text-center">Learn More</a>
+    <section class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        Đầu tư thông minh cùng <span class="highlight">DOÃN ĐỨC</span> – 
+                        Biến kiến thức thành lợi nhuận
+                    </h1>
+                    <p class="hero-subtitle">
+                        Cập nhật nhận định thị trường mỗi ngày, tham gia khóa học chuyên sâu & 
+                        nhận hỗ trợ mở tài khoản chứng khoán
+                    </p>
+                    <div class="hero-cta">
+                        <a href="#course" class="btn btn-primary">
+                            <i class="fas fa-graduation-cap"></i>
+                            Đăng ký khóa học
+                        </a>
+                        <a href="#account" class="btn btn-secondary">
+                            <i class="fas fa-chart-line"></i>
+                            Mở tài khoản ngay
+                        </a>
                     </div>
                 </div>
-                <div class="hidden md:block relative">
-                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Stock market dashboard" class="rounded-lg shadow-2xl animate-float">
-                    <div class="absolute -bottom-5 -left-5 bg-yellow-400 text-gray-900 px-4 py-2 rounded-lg shadow-lg">
-                        <p class="font-bold">Limited Time Offer!</p>
+                <div class="hero-image">
+                    <div class="hero-avatar">
+                        <div class="avatar-placeholder">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="avatar-stats">
+                            <div class="stat">
+                                <span class="stat-number">10K+</span>
+                                <span class="stat-label">Học viên</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-number">55K+</span>
+                                <span class="stat-label">Subscribers</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Stats Section -->
-    <section class="bg-gray-50 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div class="p-4">
-                    <p class="text-3xl md:text-4xl font-bold text-blue-600">10,000+</p>
-                    <p class="text-gray-600 mt-2">Students Trained</p>
+    <!-- About KOL Section -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <div class="kol-photo">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
                 </div>
-                <div class="p-4">
-                    <p class="text-3xl md:text-4xl font-bold text-blue-600">94%</p>
-                    <p class="text-gray-600 mt-2">Success Rate</p>
-                </div>
-                <div class="p-4">
-                    <p class="text-3xl md:text-4xl font-bold text-blue-600">15</p>
-                    <p class="text-gray-600 mt-2">Expert Instructors</p>
-                </div>
-                <div class="p-4">
-                    <p class="text-3xl md:text-4xl font-bold text-blue-600">24/7</p>
-                    <p class="text-gray-600 mt-2">Support Available</p>
+                <div class="about-text">
+                    <h2>Về <span class="highlight">DOÃN ĐỨC</span></h2>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>8+ năm kinh nghiệm thị trường chứng khoán</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-users"></i>
+                            <span>Hơn 10.000 học viên đã tin tưởng</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-youtube"></i>
+                            <span>55.000+ subscriber trên YouTube</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-chart-bar"></i>
+                            <span>Chuyên gia phân tích thị trường hàng đầu</span>
+                        </div>
+                    </div>
+                    <blockquote class="kol-quote">
+                        <i class="fas fa-quote-left"></i>
+                        "Đầu tư không khó nếu bạn có người đồng hành đúng đắn. 
+                        Tôi ở đây để giúp bạn xây dựng chiến lược đầu tư thông minh và bền vững."
+                        <i class="fas fa-quote-right"></i>
+                    </blockquote>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="features" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Why Choose Our Course</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">We provide the most comprehensive stock market education with practical, real-world applications.</p>
+    <!-- CTA Block -->
+    <section class="cta-block">
+        <div class="container">
+            <h2 class="section-title">Bắt đầu hành trình đầu tư của bạn</h2>
+            <div class="cta-grid">
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Tham gia cộng đồng</h3>
+                    <p>Kết nối với 10K+ nhà đầu tư</p>
+                    <a href="#community" class="btn-cta">Tham gia group</a>
+                </div>
+
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-play-circle"></i>
+                    </div>
+                    <h3>Kênh YouTube</h3>
+                    <p>Phân tích thị trường hàng ngày</p>
+                    <a href="#videos" class="btn-cta">Đăng ký kênh</a>
+                </div>
+
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Đăng ký khóa học</h3>
+                    <p>Học từ A-Z với chuyên gia</p>
+                    <a href="#course" class="btn-cta">Tham gia ngay</a>
+                </div>
+                
+                <div class="cta-item">
+                    <div class="cta-icon">
+                        <i class="fas fa-credit-card"></i>
+                    </div>
+                    <h3>Mở tài khoản</h3>
+                    <p>Hỗ trợ miễn phí 100%</p>
+                    <a href="#account" class="btn-cta">Đăng ký ngay</a>
+                </div>
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- YouTube Videos Section -->
+    <section class="videos" id="videos">
+        <div class="container">
+            <h2 class="section-title">Theo dõi phân tích thị trường mới nhất từ <span class="highlight">KOL Expert</span></h2>
+            <div class="videos-grid">
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">10:25</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Phân tích VN-Index tuần này - Xu hướng tăng mạnh?</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 25K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 2 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">15:30</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Top 5 cổ phiếu tiềm năng tháng 12/2024</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 42K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 1 tuần trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">8:15</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Chiến lược giao dịch ngắn hạn hiệu quả</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 18K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 3 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">12:45</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Quản trị rủi ro - Bí quyết của nhà đầu tư thành công</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 35K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 5 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">20:10</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Phân tích kỹ thuật từ căn bản đến nâng cao</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 28K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 1 tuần trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">14:20</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Xây dựng danh mục đầu tư cân bằng</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 31K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 4 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">9:35</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Tâm lý thị trường và cách đọc hiểu</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 22K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 6 ngày trước</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-thumbnail">
+                        <i class="fas fa-play"></i>
+                        <div class="video-duration">16:50</div>
+                    </div>
+                    <div class="video-info">
+                        <h4>Case Study: Lợi nhuận 200% trong 6 tháng</h4>
+                        <div class="video-stats">
+                            <span><i class="fas fa-eye"></i> 45K lượt xem</span>
+                            <span><i class="fas fa-calendar"></i> 1 tuần trước</span>
+                        </div>
+                    </div>
+                </div>
             </div>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-user-tie text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Expert Instructors</h3>
-                    <p class="text-gray-600">Learn from Wall Street veterans with 20+ years of trading experience who have managed multi-million dollar portfolios.</p>
-                </div>
-                
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Interactive Learning</h3>
-                    <p class="text-gray-600">Practice with our simulated trading platform that mirrors real market conditions without risking your capital.</p>
-                </div>
-                
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-chart-pie text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Comprehensive Curriculum</h3>
-                    <p class="text-gray-600">From fundamentals to advanced strategies, our course covers everything you need to become a successful investor.</p>
-                </div>
-                
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-users text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Community Access</h3>
-                    <p class="text-gray-600">Join our exclusive investor community for networking, idea sharing, and ongoing support from peers and mentors.</p>
-                </div>
-                
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-certificate text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Certification</h3>
-                    <p class="text-gray-600">Earn a recognized certification upon completion to validate your investment knowledge and skills.</p>
-                </div>
-                
-                <div class="feature-card bg-white p-8 rounded-xl shadow-md border border-gray-100 transition duration-300">
-                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                        <i class="fas fa-clock text-blue-600 text-2xl"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-3">Lifetime Access</h3>
-                    <p class="text-gray-600">Get lifetime access to all course materials, including future updates and additional resources we add.</p>
-                </div>
+            <div class="videos-cta">
+                <a href="#youtube" class="btn btn-outline">
+                    <i class="fab fa-youtube"></i>
+                    Xem thêm trên kênh YouTube
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Curriculum Section -->
-    <section id="curriculum" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Course Curriculum</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Our structured learning path takes you from beginner to advanced investor in just 8 weeks.</p>
-            </div>
-            
-            <div class="bg-white rounded-xl shadow-md overflow-hidden max-w-4xl mx-auto">
-                <div class="divide-y divide-gray-200">
-                    <!-- Module 1 -->
-                    <div class="p-6 md:p-8">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3 mr-6">
-                                <span class="text-blue-600 font-bold text-xl">01</span>
-                            </div>
+    <!-- Course Section -->
+    <section class="course" id="course">
+        <div class="container">
+            <div class="course-content">
+                <div class="course-info">
+                    <h2 class="section-title">Khóa học chứng khoán từ A–Z cho nhà đầu tư mới & nâng cao</h2>
+                    
+                    <div class="course-description">
+                        <div class="course-feature">
+                            <i class="fas fa-video"></i>
                             <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Stock Market Fundamentals</h3>
-                                <p class="text-gray-600 mb-4">Learn the basics of how the stock market works, different types of securities, and key financial concepts.</p>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Understanding market mechanics</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Bull vs. bear markets</li>
-                                    <li class="fas fa-check-circle text-green-500 mr-2"></i> Market indexes and their significance</li>
-                                </ul>
+                                <h4>Học qua Livestream + Tài liệu thực chiến</h4>
+                                <p>Tương tác trực tiếp với giảng viên, giải đáp thắc mắc ngay lập tức</p>
+                            </div>
+                        </div>
+
+                        <div class="course-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <div>
+                                <h4>Nội dung toàn diện</h4>
+                                <p>Phân tích kỹ thuật, quản trị rủi ro, xây dựng danh mục, chiến lược giao dịch</p>
+                            </div>
+                        </div>
+
+                        <div class="course-feature">
+                            <i class="fas fa-laptop"></i>
+                            <div>
+                                <h4>Linh hoạt học tập</h4>
+                                <p>Học online qua Zoom + Offline tại Hà Nội và TP.HCM</p>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Module 2 -->
-                    <div class="p-6 md:p-8">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3 mr-6">
-                                <span class="text-blue-600 font-bold text-xl">02</span>
+
+                    <div class="course-usp">
+                        <h3>Điểm nổi bật của khóa học:</h3>
+                        <ul>
+                            <li><i class="fas fa-star"></i> Giảng dạy bởi KOL uy tín với 8+ năm kinh nghiệm</li>
+                            <li><i class="fas fa-briefcase"></i> Case study thực tế từ thị trường Việt Nam</li>
+                            <li><i class="fas fa-headset"></i> Hỗ trợ học viên sau khóa học suốt đời</li>
+                            <li><i class="fas fa-certificate"></i> Cấp chứng chỉ hoàn thành khóa học</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="course-card">
+                    <div class="course-price">
+                        <div class="price-original">2.990.000đ</div>
+                        <div class="price-current">1.990.000đ</div>
+                        <div class="price-save">Tiết kiệm 1.000.000đ</div>
+                    </div>
+
+                    <div class="countdown-timer">
+                        <h4>Ưu đãi kết thúc trong:</h4>
+                        <div class="countdown">
+                            <div class="time-unit">
+                                <span class="time-value" id="days">07</span>
+                                <span class="time-label">Ngày</span>
                             </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Fundamental Analysis</h3>
-                                <p class="text-gray-600 mb-4">Master the art of evaluating companies through financial statements and economic indicators.</p>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Reading financial statements</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Valuation metrics (P/E, P/B, EV/EBITDA)</li>
-                                    <li class="fas fa-check-circle text-green-500 mr-2"></i> Identifying undervalued stocks</li>
-                                </ul>
+                            <div class="time-unit">
+                                <span class="time-value" id="hours">12</span>
+                                <span class="time-label">Giờ</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="minutes">30</span>
+                                <span class="time-label">Phút</span>
+                            </div>
+                            <div class="time-unit">
+                                <span class="time-value" id="seconds">45</span>
+                                <span class="time-label">Giây</span>
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Module 3 -->
-                    <div class="p-6 md:p-8">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3 mr-6">
-                                <span class="text-blue-600 font-bold text-xl">03</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Technical Analysis</h3>
-                                <p class="text-gray-600 mb-4">Learn to read price charts and identify patterns that can predict future price movements.</p>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Candlestick patterns</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Support and resistance levels</li>
-                                    <li class="fas fa-check-circle text-green-500 mr-2"></i> Momentum indicators (RSI, MACD)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Module 4 -->
-                    <div class="p-6 md:p-8">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3 mr-6">
-                                <span class="text-blue-600 font-bold text-xl">04</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Portfolio Management</h3>
-                                <p class="text-gray-600 mb-4">Build and manage a diversified investment portfolio tailored to your financial goals.</p>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Asset allocation strategies</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Risk management techniques</li>
-                                    <li class="fas fa-check-circle text-green-500 mr-2"></i> Rebalancing your portfolio</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Module 5 -->
-                    <div class="p-6 md:p-8">
-                        <div class="flex items-start">
-                            <div class="flex-shrink-0 bg-blue-100 rounded-md p-3 mr-6">
-                                <span class="text-blue-600 font-bold text-xl">05</span>
-                            </div>
-                            <div>
-                                <h3 class="text-xl font-bold text-gray-900 mb-2">Advanced Strategies</h3>
-                                <p class="text-gray-600 mb-4">Explore sophisticated investment strategies used by professional traders.</p>
-                                <ul class="space-y-2 text-gray-600">
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Options trading basics</li>
-                                    <li class="flex items-center"><i class="fas fa-check-circle text-green-500 mr-2"></i> Short selling strategies</li>
-                                    <li class="fas fa-check-circle text-green-500 mr-2"></i> Sector rotation techniques</li>
-                                </ul>
-                            </div>
-                        </div>
+
+                    <a href="#register" class="btn btn-primary btn-large">
+                        <i class="fas fa-rocket"></i>
+                        Đăng ký ngay để giữ chỗ
+                    </a>
+
+                    <div class="course-guarantee">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Cam kết hoàn tiền 100% nếu không hài lòng</span>
                     </div>
                 </div>
             </div>
@@ -281,348 +394,207 @@
     </section>
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Students Say</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Don't just take our word for it. Here's what our graduates have to say about their experience.</p>
-            </div>
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Cảm nhận của học viên</h2>
             
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/women/43.jpg" alt="Sarah Johnson" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-900">Sarah Johnson</h4>
-                            <p class="text-blue-600 text-sm">Portfolio Manager</p>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
+                        <p>"Nhờ tham gia khóa học, tôi đã tăng 45% lợi nhuận trong 6 tháng đầu. 
+                        Anh KOL giảng dạy rất dễ hiểu và luôn hỗ trợ học viên nhiệt tình."</p>
                     </div>
-                    <p class="text-gray-600 italic">"This course completely transformed my approach to investing. I went from losing money to consistently making 15-20% annual returns. The technical analysis module alone was worth the price!"</p>
-                    <div class="flex mt-4 text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Nguyễn Văn A</h4>
+                            <span>Học viên khóa K15</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-900">Michael Chen</h4>
-                            <p class="text-blue-600 text-sm">Retail Investor</p>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
                         </div>
+                        <p>"Từ một người hoàn toàn mới với chứng khoán, giờ tôi đã tự tin giao dịch 
+                        và có thu nhập ổn định từ đầu tư. Cảm ơn anh KOL rất nhiều!"</p>
                     </div>
-                    <p class="text-gray-600 italic">"The instructors break down complex concepts into easy-to-understand lessons. I finally understand how to read financial statements and make informed investment decisions."</p>
-                    <div class="flex mt-4 text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Trần Thị B</h4>
+                            <span>Học viên khóa K12</span>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="testimonial-card bg-gray-50 p-6 rounded-lg shadow-sm border border-gray-200">
-                    <div class="flex items-center mb-4">
-                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Emily Rodriguez" class="w-12 h-12 rounded-full mr-4">
-                        <div>
-                            <h4 class="font-bold text-gray-900">Emily Rodriguez</h4>
-                            <p class="text-blue-600 text-sm">Small Business Owner</p>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Khóa học có nội dung chất lượng cao, thực tế và áp dụng được ngay. 
+                        Đặc biệt phần quản trị rủi ro giúp tôi tránh được nhiều sai lầm."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Lê Minh C</h4>
+                            <span>Học viên khóa K18</span>
                         </div>
                     </div>
-                    <p class="text-gray-600 italic">"I was a complete beginner with zero knowledge about the stock market. After completing this course, I feel confident managing my own investments. The community support is incredible!"</p>
-                    <div class="flex mt-4 text-yellow-400">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"Community rất tích cực, mọi người chia sẻ kinh nghiệm và hỗ trợ nhau. 
+                        Tôi cảm thấy không còn đi một mình trên thị trường chứng khoán nữa."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="author-info">
+                            <h4>Phạm Thu D</h4>
+                            <span>Học viên khóa K20</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing Section -->
-    <section id="pricing" class="py-16 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Choose Your Plan</h2>
-                <p class="text-lg text-gray-600 max-w-3xl mx-auto">We offer flexible pricing options to suit every investor's needs.</p>
-            </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-                <!-- Basic Plan -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-md border border-gray-200 transition duration-300">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Basic</h3>
-                    <p class="text-gray-600 mb-6">Perfect for beginners who want to learn the fundamentals</p>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$297</span>
-                        <span class="text-gray-500">/one-time</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Core video lessons</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Downloadable resources</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Basic trading simulator</li>
-                        <li class="flex items-center text-gray-400"><i class="fas fa-times text-red-400 mr-2"></i> <span>Live Q&A sessions</span></li>
-                        <li class="flex items-center text-gray-400"><i class="fas fa-times text-red-400 mr-2"></i> <span>Advanced modules</span></li>
-                    </ul>
-                    <a href="#register" class="block w-full bg-gray-200 text-gray-800 text-center py-3 rounded-md font-medium hover:bg-gray-300 transition duration-300">Get Started</a>
-                </div>
+    <!-- Final CTA Section -->
+    <section class="final-cta" id="register">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Hãy bắt đầu hành trình đầu tư thông minh cùng <span class="highlight">KOL Expert</span></h2>
+                <p>Chỉ cần một bước – bạn sẽ không còn đi một mình trên thị trường chứng khoán.</p>
                 
-                <!-- Pro Plan (Featured) -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-lg border-2 border-blue-500 relative transition duration-300 transform scale-105">
-                    <div class="absolute top-0 right-0 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">MOST POPULAR</div>
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Pro</h3>
-                    <p class="text-gray-600 mb-6">For serious investors who want comprehensive training</p>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$597</span>
-                        <span class="text-gray-500">/one-time</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> All Basic features</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Advanced trading strategies</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Full-featured trading simulator</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Weekly live Q&A sessions</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Portfolio review (1x)</li>
-                    </ul>
-                    <a href="#register" class="block w-full bg-blue-600 text-white text-center py-3 rounded-md font-medium hover:bg-blue-700 transition duration-300">Get Started</a>
+                <div class="final-cta-buttons">
+                    <a href="#course" class="btn btn-primary btn-xl">
+                        <i class="fas fa-graduation-cap"></i>
+                        Đăng ký khóa học ngay
+                    </a>
+                    <a href="#account" class="btn btn-secondary btn-xl">
+                        <i class="fas fa-chart-line"></i>
+                        Mở tài khoản chứng khoán
+                    </a>
                 </div>
-                
-                <!-- Elite Plan -->
-                <div class="pricing-card bg-white p-8 rounded-xl shadow-md border border-gray-200 transition duration-300">
-                    <h3 class="text-xl font-bold text-gray-900 mb-2">Elite</h3>
-                    <p class="text-gray-600 mb-6">For those who want premium support and mentorship</p>
-                    <div class="mb-6">
-                        <span class="text-4xl font-bold text-gray-900">$1,497</span>
-                        <span class="text-gray-500">/one-time</span>
-                    </div>
-                    <ul class="space-y-3 mb-8">
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> All Pro features</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Private mentorship sessions</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Monthly portfolio reviews</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Exclusive investment alerts</li>
-                        <li class="flex items-center"><i class="fas fa-check text-green-500 mr-2"></i> Lifetime course updates</li>
-                    </ul>
-                    <a href="#register" class="block w-full bg-gray-200 text-gray-800 text-center py-3 rounded-md font-medium hover:bg-gray-300 transition duration-300">Get Started</a>
-                </div>
-            </div>
-            
-            <div class="mt-12 text-center">
-                <p class="text-gray-600">Need a payment plan? <a href="#" class="text-blue-600 hover:underline">Contact us</a> for flexible options.</p>
-            </div>
-        </div>
-    </section>
 
-    <!-- FAQ Section -->
-    <section class="py-16 bg-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Frequently Asked Questions</h2>
-                <p class="text-lg text-gray-600">Find answers to common questions about our stock investment course.</p>
-            </div>
-            
-            <div class="space-y-4">
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
-                        <span class="text-lg font-medium text-gray-900">Do I need any prior experience to take this course?</span>
-                        <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6 pt-0">
-                        <p class="text-gray-600">No prior experience is necessary! Our course is designed to take you from absolute beginner to confident investor. We start with the fundamentals and gradually build up to more advanced concepts.</p>
+                <div class="trust-indicators">
+                    <div class="trust-item">
+                        <i class="fas fa-users"></i>
+                        <span>10.000+ học viên tin tưởng</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-star"></i>
+                        <span>4.9/5 đánh giá khóa học</span>
+                    </div>
+                    <div class="trust-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Cam kết hoàn tiền 100%</span>
                     </div>
                 </div>
-                
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
-                        <span class="text-lg font-medium text-gray-900">How long will I have access to the course materials?</span>
-                        <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6 pt-0">
-                        <p class="text-gray-600">You'll have lifetime access to all course materials, including any future updates we make. This means you can revisit the content whenever you need a refresher.</p>
-                    </div>
-                </div>
-                
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
-                        <span class="text-lg font-medium text-gray-900">What's the time commitment required?</span>
-                        <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6 pt-0">
-                        <p class="text-gray-600">The course is designed to be completed in 8 weeks with about 5-7 hours of study per week. However, you can go at your own pace since you have lifetime access.</p>
-                    </div>
-                </div>
-                
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
-                        <span class="text-lg font-medium text-gray-900">Will I get support if I have questions?</span>
-                        <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6 pt-0">
-                        <p class="text-gray-600">Yes! All students get access to our private community where you can ask questions and get answers from both instructors and fellow students. Pro and Elite members get additional live Q&A sessions.</p>
-                    </div>
-                </div>
-                
-                <div class="border border-gray-200 rounded-lg overflow-hidden">
-                    <button class="faq-toggle w-full flex justify-between items-center p-6 text-left focus:outline-none">
-                        <span class="text-lg font-medium text-gray-900">Is there a money-back guarantee?</span>
-                        <i class="fas fa-chevron-down text-blue-600 transition-transform duration-300"></i>
-                    </button>
-                    <div class="faq-content hidden px-6 pb-6 pt-0">
-                        <p class="text-gray-600">Absolutely. We offer a 30-day money-back guarantee. If you're not satisfied with the course for any reason, just let us know within 30 days of purchase for a full refund.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section id="register" class="py-16 hero-gradient text-white">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Take Control of Your Financial Future?</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto opacity-90">Join thousands of students who have transformed their investment skills with our comprehensive course.</p>
-            
-            <div class="bg-white rounded-lg shadow-xl p-8 max-w-2xl mx-auto">
-                <h3 class="text-2xl font-bold text-gray-900 mb-6">Register for the Course</h3>
-                
-                <form class="space-y-4 text-left">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="first-name" class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                            <input type="text" id="first-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                        <div>
-                            <label for="last-name" class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                            <input type="text" id="last-name" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
-                        <input type="email" id="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    
-                    <div>
-                        <label for="plan" class="block text-sm font-medium text-gray-700 mb-1">Select Plan</label>
-                        <select id="plan" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500">
-                            <option value="basic">Basic - $297</option>
-                            <option value="pro" selected>Pro - $597 (Most Popular)</option>
-                            <option value="elite">Elite - $1,497</option>
-                        </select>
-                    </div>
-                    
-                    <div class="pt-2">
-                        <button type="submit" class="w-full bg-blue-600 text-white py-3 px-6 rounded-md font-medium hover:bg-blue-700 transition duration-300">Enroll Now</button>
-                    </div>
-                    
-                    <p class="text-xs text-gray-500 mt-4">By registering, you agree to our Terms of Service and Privacy Policy.</p>
-                </form>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">StockMastery</h3>
-                    <p class="text-gray-400 text-sm">Empowering investors with knowledge and tools to achieve financial success in the stock market.</p>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <h3>KOL<span class="highlight">Invest</span></h3>
+                    <p>Đồng hành cùng bạn trên hành trình đầu tư thông minh</p>
                 </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
-                        <li><a href="#curriculum" class="text-gray-400 hover:text-white transition">Curriculum</a></li>
-                        <li><a href="#testimonials" class="text-gray-400 hover:text-white transition">Testimonials</a></li>
-                        <li><a href="#pricing" class="text-gray-400 hover:text-white transition">Pricing</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Privacy Policy</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Terms of Service</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white transition">Refund Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Connect With Us</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-linkedin-in"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white transition"><i class="fab fa-youtube"></i></a>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Liên kết nhanh</h4>
+                        <ul>
+                            <li><a href="#about">Giới thiệu</a></li>
+                            <li><a href="#course">Khóa học</a></li>
+                            <li><a href="#videos">YouTube</a></li>
+                            <li><a href="#community">Cộng đồng</a></li>
+                        </ul>
                     </div>
-                    <p class="text-gray-400 text-sm mt-4">support@stockmastery.com</p>
+
+                    <div class="footer-column">
+                        <h4>Liên hệ</h4>
+                        <div class="contact-info">
+                            <div class="contact-item">
+                                <i class="fas fa-envelope"></i>
+                                <span>contact@kolinvest.vn</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fas fa-phone"></i>
+                                <span>0901.234.567</span>
+                            </div>
+                            <div class="contact-item">
+                                <i class="fab fa-telegram"></i>
+                                <span>@KOLInvestZalo</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Theo dõi chúng tôi</h4>
+                        <div class="social-links">
+                            <a href="#" class="social-link">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-youtube"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fab fa-telegram"></i>
+                            </a>
+                            <a href="#" class="social-link">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
-                <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 StockMastery. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Privacy Policy</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Terms of Service</a>
-                    <a href="#" class="text-gray-400 hover:text-white transition text-sm">Contact Us</a>
-                </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 KOLInvest. Tất cả các quyền được bảo lưu.</p>
             </div>
         </div>
     </footer>
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobile-menu-button').addEventListener('click', function() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        });
-
-        // FAQ toggle functionality
-        document.querySelectorAll('.faq-toggle').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const icon = button.querySelector('i');
-                
-                // Toggle content
-                content.classList.toggle('hidden');
-                
-                // Rotate icon
-                if (content.classList.contains('hidden')) {
-                    icon.style.transform = 'rotate(0deg)';
-                } else {
-                    icon.style.transform = 'rotate(180deg)';
-                }
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile menu if open
-                    const mobileMenu = document.getElementById('mobile-menu');
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                }
-            });
-        });
-    </script>
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
 </body>
 </html>

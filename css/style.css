@@ -17,7 +17,7 @@ body {
 }
 
 .container {
-    max-width: 1200px;
+    max-width: calc(100% - 120px);
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -188,7 +188,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .hero {
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    /* background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); */
+    background-image: url("html-starter/src/banner.jpg");
     padding: 120px 0 80px;
     min-height: 100vh;
     display: flex;
@@ -196,7 +197,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .hero-container {
-    max-width: 1200px;
+    max-width: calc(100% - 120px);
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -229,7 +230,7 @@ h1, h2, h3, h4, h5, h6 {
     flex-wrap: wrap;
 }
 
-.hero-image {
+ƒc.hero-image {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -956,10 +957,15 @@ h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 480px) {
     .container {
+        max-width: calc(100% - 10px);
         padding: 0 15px;
+    }
+    .hero-container{
+        max-width: calc(100% - 10px);
     }
 
     .hero-title {
+        
         font-size: 2rem;
     }
 

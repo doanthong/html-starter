@@ -256,16 +256,14 @@ h6 {
 }
 
 .avatar-placeholder {
-    width: 250px;
+     width: 250px;
     height: 250px;
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    background-image: url('https://yt3.ggpht.com/lNaemo_DtC_0o-mRAFFWvEkWHmaeFwssYDTefEmf0trNdBAttxuEDuTKGSgBJ7RDIwh_FgOIang=s600-c-k-c0x00ffffff-no-rj-rp-mo');
+    background-size: cover;
+    background-position: center;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 6rem;
-    box-shadow: 0 20px 40px rgba(231, 76, 60, 0.3);
+    margin: 0 auto;
+    box-shadow: 0 15px 35px rgba(52, 152, 219, 0.3);
 }
 
 .avatar-stats {
@@ -336,7 +334,7 @@ h6 {
 }
 
 .stat-item i {
-    color: #e74c3c;
+    color: #0d0d0d;
     font-size: 1.2rem;
     width: 20px;
 }
@@ -345,7 +343,7 @@ h6 {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 12px;
-    border-left: 4px solid #e74c3c;
+    border-left: 4px solid #06b661;
     font-style: italic;
     font-size: 1.1rem;
     line-height: 1.7;
@@ -464,13 +462,21 @@ h6 {
 
 .video-thumbnail {
     position: relative;
-    height: 180px;
+    height: auto;
     background: linear-gradient(135deg, #34495e, #2c3e50);
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
     font-size: 3rem;
+}
+
+.video-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* đảm bảo ảnh luôn vừa khít */
+    object-position: center; /* căn giữa */
+    display: block;
 }
 
 .video-duration {

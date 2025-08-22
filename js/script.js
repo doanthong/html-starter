@@ -47,7 +47,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 // Countdown Timer
 function startCountdown() {
     // Set countdown end date (7 days from now)
-    const countDate = new Date().getTime() + (7 * 24 * 60 * 60 * 1000);
+    const countDate = new Date().getTime() + (1 * 24 * 60 * 60 * 1000);
     
     const timer = setInterval(() => {
         const now = new Date().getTime();
@@ -346,7 +346,7 @@ function initScrollToTop() {
         height: 50px;
         border: none;
         border-radius: 50%;
-        background: linear-gradient(135deg, #e74c3c, #c0392b);
+        background: linear-gradient(135deg, #01ef5cff, #00ff44ff);
         color: white;
         font-size: 18px;
         cursor: pointer;
@@ -354,7 +354,7 @@ function initScrollToTop() {
         opacity: 0;
         visibility: hidden;
         transition: all 0.3s ease;
-        box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        box-shadow: 0 4px 15px rgba(137, 60, 231, 0.3);
     `;
     
     scrollBtn.addEventListener('click', () => {

@@ -165,15 +165,20 @@ function showRegistrationModal() {
             <p style="margin-bottom: 20px;">Để đăng ký khóa học, vui lòng liên hệ:</p>
             <div style="margin-bottom: 15px;">
                 <strong>Hotline:</strong> 0901.234.567
+                <ul style="text-align: left; margin: 20px 0;">
+                <li>Hồng loan : 0986124142</li>
+                <li>Hà Nguyễn : 0342391654</li>
+                <li>Phương Linh : 0772717677</li>
+                <li>Lâm Trang : 036331703</li>
+            </ul>
             </div>
+            
             <div style="margin-bottom: 15px;">
-                <strong>Email:</strong> contact@kolinvest.vn
+                <strong>Email:</strong> nguyendoanduc.nguyen@gmail.com
             </div>
-            <div style="margin-bottom: 20px;">
-                <strong>Zalo:</strong> @KOLInvestZalo
-            </div>
+            
             <p style="color: #e74c3c; font-weight: bold;">
-                Giá ưu đãi chỉ còn: 1.990.000đ (tiết kiệm 1.000.000đ)
+                Nhanh tay đăng ký - Số lượng có hạn
             </p>
         </div>
         `
@@ -187,15 +192,15 @@ function showAccountModal() {
         'Mở tài khoản chứng khoán',
         `
         <div style="text-align: center; padding: 20px;">
-            <h3 style="margin-bottom: 20px;">Hỗ trợ mở tài khoản chứng khoán miễn phí</h3>
-            <p style="margin-bottom: 20px;">Chúng tôi hỗ trợ mở tài khoản tại các công ty chứng khoán uy tín:</p>
+            <h3 style="margin-bottom: 20px;">Hỗ trợ mở tài khoản chứng khoán & Chuyển ID</h3>
+            <p style="margin-bottom: 20px;">Liên hệ team trợ lý Doãn Đức</p>
             <ul style="text-align: left; margin: 20px 0;">
-                <li>• SSI - Công ty Chứng khoán Sài Gòn</li>
-                <li>• VPS - Công ty Chứng khoán VPS</li>
-                <li>• HSC - Công ty Chứng khoán HSC</li>
-                <li>• TCBS - Công ty Chứng khoán Techcombank</li>
+                <li>Hồng loan : 0986124142</li>
+                <li>Hà Nguyễn : 0342391654</li>
+                <li>Phương Linh : 0772717677</li>
+                <li>Lâm Trang : 036331703</li>
             </ul>
-            <p style="margin-bottom: 20px;">Liên hệ ngay để được tư vấn miễn phí:</p>
+            <p style="margin-bottom: 20px;">Liên hệ ngay để được tư vấn</p>
             <div style="margin-bottom: 15px;">
                 <strong>Hotline:</strong> 0901.234.567
             </div>
@@ -235,7 +240,7 @@ function createModal(title, content) {
             animation: slideUp 0.3s ease;
         ">
             <div style="
-                background: linear-gradient(135deg, #e74c3c, #c0392b);
+                background: linear-gradient(135deg, #9b2ddfff, #31e88cff);
                 color: white;
                 padding: 20px;
                 display: flex;

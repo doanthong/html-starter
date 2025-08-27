@@ -936,6 +936,10 @@ h6 {
         width: 200px;
         height: 200px;
     }
+    .btn
+    {
+        width: 300px;
+    }
 
     .course-content {
         grid-template-columns: 1fr;

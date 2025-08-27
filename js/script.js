@@ -114,7 +114,7 @@ function initVideoCards() {
         card.addEventListener('click', () => {
             // Simulate video play (you can replace with actual YouTube links)
             const videoTitle = card.querySelector('h4').textContent;
-            alert(`Đang mở video: "${videoTitle}"\n\nTrong thực tế, đây sẽ là link đến video YouTube tương ứng.`);
+            alert(`Video này chỉ dành cho cộng đồng DDF - Tham gia room cộng đồng DDF để xem các video nội bộ`);
         });
         
         // Add hover sound effect (optional)

@@ -146,7 +146,7 @@ function initCTATracking() {
             // For demo purposes, show alert for specific actions
             if (buttonText.includes('Đăng ký khóa học') || buttonText.includes('Đăng ký ngay')) {
                 e.preventDefault();
-                showRegistrationModal();
+                // showRegistrationModal();
             } else if (buttonText.includes('Mở tài khoản')) {
                 e.preventDefault();
                 showAccountModal();
@@ -463,3 +463,181 @@ window.KOLInvest = {
     validateEmail,
     validatePhone
 };
+
+// xử lý submit form
+// URL của Web App từ Google Apps Script
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxSZvlhvgGkzw4fD9WSyUC3ykZ0ja1OTZ9hWGGusyPWGjc8yGV84TLC3V8JQQT0whhZ-g/exec';
+
+        const popupOverlay = document.getElementById('popupOverlay');
+        const successPopup = document.getElementById('successPopup');
+        const errorPopup = document.getElementById('errorPopup');
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+
+        // Store form data
+        let submittedData = {};
+
+        // Open popup
+        function openPopup() {
+            popupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close popup
+        function closePopup() {
+            popupOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close success popup
+        function closeSuccessPopup() {
+            successPopup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close error popup
+        function closeErrorPopup() {
+            errorPopup.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Show success popup with data
+        function showSuccessPopup(data) {
+            const successInfo = document.getElementById('successInfo');
+            successInfo.innerHTML = `
+                <div class="info-item">
+                    <span class="info-label">Họ tên:</span>
+                    <span>${data.fullName}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Số điện thoại:</span>
+                    <span>${data.phone}</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nội dung tư vấn:</span>
+                    <span>${data.consultType}</span>
+                </div>
+                ${data.notes ? `
+                <div class="info-item">
+                    <span class="info-label">Ghi chú:</span>
+                    <span>${data.notes}</span>
+                </div>
+                ` : ''}
+            `;
+            
+            // Close form popup
+            closePopup();
+            
+            // Show success popup
+            successPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Auto close after 5 seconds
+            setTimeout(() => {
+                closeSuccessPopup();
+            }, 10000);
+        }
+
+        // Show error popup
+        function showErrorPopup(message) {
+            const errorMsg = document.getElementById('errorMsg');
+            errorMsg.textContent = message || 'Rất tiếc, đã có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại sau.';
+            
+            errorPopup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close popup when clicking overlay
+        function closePopupOnOverlay(event) {
+            if (event.target === popupOverlay) {
+                closePopup();
+            }
+        }
+
+        // Close popups with ESC key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                if (popupOverlay.classList.contains('active')) {
+                    closePopup();
+                }
+                if (successPopup.classList.contains('active')) {
+                    closeSuccessPopup();
+                }
+                if (errorPopup.classList.contains('active')) {
+                    closeErrorPopup();
+                }
+            }
+        });
+
+        // Form submission
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            // Validate phone number
+            const phone = document.getElementById('phone').value;
+            if (!/^[0-9]{10,11}$/.test(phone)) {
+                showErrorPopup('Số điện thoại không hợp lệ. Vui lòng nhập 10-11 chữ số.');
+                return;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            loadingSpinner.style.display = 'block';
+
+            // Prepare form data
+            submittedData = {
+                fullName: document.getElementById('fullName').value,
+                phone: phone,
+                consultType: document.getElementById('consultType').value,
+                notes: document.getElementById('notes').value,
+                timestamp: new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' })
+            };
+
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(submittedData)
+                });
+
+                // Reset form
+                form.reset();
+
+                // Show success popup
+                showSuccessPopup(submittedData);
+
+            } catch (error) {
+                console.error('Error:', error);
+                showErrorPopup('Có lỗi xảy ra khi gửi form. Vui lòng kiểm tra kết nối mạng và thử lại.');
+            } finally {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                loadingSpinner.style.display = 'none';
+            }
+        });
+
+        // Phone number validation
+        document.getElementById('phone').addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '');
+        });
+
+        // Close success popup when clicking outside
+        successPopup.addEventListener('click', function(event) {
+            if (event.target === successPopup) {
+                closeSuccessPopup();
+            }
+        });
+
+        // Close error popup when clicking outside
+        errorPopup.addEventListener('click', function(event) {
+            if (event.target === errorPopup) {
+                closeErrorPopup();
+            }
+        });

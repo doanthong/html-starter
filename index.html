@@ -51,8 +51,9 @@
                     <a href="#course" class="nav-link">Đào tạo</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#register" class="nav-cta">Đăng ký ngay</a>
+                    <a href="javascript:void(0)" class="nav-cta" onclick="openPopup()">Đăng ký ngay</a>
                 </li>
+               
             </ul>
 
             <div class="hamburger" id="hamburger">
@@ -83,7 +84,7 @@
                             Tham gia room cộng đồng<br>
                             Nhận khuyến nghị miễn phí
                         </a>
-                        <a href="#course" class="btn btn-primary">
+                        <a href="#course" class="btn btn-primary" onclick="openPopup()">
                             <i class="fas fa-graduation-cap"></i>
                             Đăng ký tư vấn
                         </a>
@@ -199,7 +200,7 @@
                         </div>
                         <h3>Đăng ký tư vấn bởi<br>Doãn Đức</h3>
                         <p>Đăng ký mở tài khoản / chuyển ID do Doãn Đức quản lý</p>
-                        <a href="#account" class="btn-cta">Đăng ký ngay</a>
+                        <a href="#account" class="btn-cta" onclick="openPopup()">Đăng ký ngay</a>
                     </div>
 
                 </div>
@@ -217,7 +218,7 @@
                         <div class="video-thumbnail">
                             <!-- <i class="fas fa-play"></i> -->
                             <img
-                                src="https://i9.ytimg.com/vi/R_G57bxvaHQ/mqdefault.jpg?v=68aec979&sqp=CNSJvMUG&rs=AOn4CLAb1DjBcwxbj9ynjZpOiBdJQITvag">
+                                src="https://i9.ytimg.com/vi/R_G57bxvaHQ/mqdefault.jpg?v=68aec979&sqp=CIyPwsUG&rs=AOn4CLBGZ5Gbdote725gBOZkaud3IMzgkw">
                             <div class="video-duration">10:25</div>
                         </div>
                         <div class="video-info">
@@ -424,7 +425,7 @@
                             </div>
                         </div>
 
-                        <a href="#register" class="btn btn-primary btn-large">
+                        <a  class="btn btn-primary btn-large" onclick="openPopup()">
                             <i class="fas fa-rocket"></i>
                             Đăng ký ngay để giữ chỗ
                         </a>
@@ -547,7 +548,7 @@
                     <p>Chỉ cần một bước – bạn sẽ không còn đi một mình trên thị trường chứng khoán.</p>
 
                     <div class="final-cta-buttons">
-                        <a href="#course" class="btn btn-primary btn-xl">
+                        <a class="btn btn-primary btn-xl" onclick="openPopup()">
                             <i class="fas fa-graduation-cap"></i>
                             Đăng ký khóa học ngay
                         </a>
@@ -575,6 +576,109 @@
             </div>
         </section>
     </section>
+    <!-- popup đăng ký thông tin -->
+     <button class="floating-btn" onclick="openPopup()" title="Đăng ký tư vấn">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/>
+        </svg>
+    </button>
+
+    <!-- Form Popup Overlay -->
+    <div class="popup-overlay" id="popupOverlay" onclick="closePopupOnOverlay(event)">
+        <div class="popup-container" onclick="event.stopPropagation()">
+            <!-- Close button -->
+            <button class="close-btn" onclick="closePopup()">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                </svg>
+            </button>
+
+            <!-- Form content -->
+            <section class="contact-section">
+                <h2 class="section-title">Đăng Ký Tư Vấn</h2>
+                <p class="section-subtitle">Vui lòng điền thông tin để chúng tôi liên hệ tư vấn</p>
+
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label class="form-label" for="fullName">
+                            Họ và tên <span>*</span>
+                        </label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" required
+                            placeholder="Nhập họ và tên của bạn">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="phone">
+                            Số điện thoại <span>*</span>
+                        </label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required 
+                            placeholder="Nhập số điện thoại" pattern="[0-9]{10,11}">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="consultType">
+                            Nội dung cần tư vấn <span>*</span>
+                        </label>
+                        <select id="consultType" name="consultType" class="form-select" required>
+                            <option value="">-- Chọn nội dung tư vấn --</option>
+                            <option value="Mở tài khoản tư vấn">Mở tài khoản tư vấn</option>
+                            <option value="Đăng ký khóa học">Đăng ký khóa học</option>
+                            <option value="Chuyển ID">Chuyển ID</option>
+                            <option value="Đăng ký vào room cộng đồng">Đăng ký vào room cộng đồng</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="notes">
+                            Ghi chú
+                        </label>
+                        <textarea id="notes" name="notes" class="form-textarea"
+                            placeholder="Nhập ghi chú thêm (nếu có)"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn" id="submitBtn">
+                        <span id="btnText">Đăng ký ngay</span>
+                        <div class="loading-spinner" id="loadingSpinner"></div>
+                    </button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="success-popup-overlay" id="successPopup">
+        <div class="success-popup">
+            <div class="success-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                </svg>
+            </div>
+            <h3 class="success-title">Đăng ký thành công!</h3>
+            <p class="success-message">
+                Cảm ơn bạn đã đăng ký. Chúng tôi đã nhận được thông tin và sẽ liên hệ với bạn trong thời gian sớm nhất.
+            </p>
+            <div class="success-info" id="successInfo">
+                <!-- Thông tin sẽ được thêm bằng JavaScript -->
+            </div>
+            <button class="success-btn" onclick="closeSuccessPopup()">Đóng</button>
+        </div>
+    </div>
+
+    <!-- Error Popup -->
+    <div class="error-popup-overlay" id="errorPopup">
+        <div class="error-popup">
+            <div class="error-icon">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                </svg>
+            </div>
+            <h3 class="error-title">Đã xảy ra lỗi!</h3>
+            <p class="error-message" id="errorMsg">
+                Rất tiếc, đã có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại sau.
+            </p>
+            <button class="error-btn" onclick="closeErrorPopup()">Thử lại</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="footer">

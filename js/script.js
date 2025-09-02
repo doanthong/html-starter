@@ -641,3 +641,296 @@ window.KOLInvest = {
                 closeErrorPopup();
             }
         });
+
+// Video Manager Module
+const VideoManager = {
+    // Configuration
+    config: {
+        scriptUrl: 'https://script.google.com/macros/s/AKfycbxiKbwl277YKSIN0K_GRMIRROqdut_JPn6Pq0eOpZQDWS496MhNYzD6c0RNHAPHvKxH/exec',
+        cacheTime: 5 * 60 * 1000, // 5 minutes
+        maxRetries: 3,
+        retryDelay: 1000
+    },
+    
+    // Cache management
+    cache: {
+        data: null,
+        timestamp: null,
+        
+        set(data) {
+            this.data = data;
+            this.timestamp = Date.now();
+            // Store in localStorage for persistence
+            try {
+                localStorage.setItem('videos_cache', JSON.stringify({
+                    data: data,
+                    timestamp: this.timestamp
+                }));
+            } catch (e) {
+                console.warn('Failed to cache videos:', e);
+            }
+        },
+        
+        get() {
+            // Check memory cache first
+            if (this.data && this.timestamp && 
+                (Date.now() - this.timestamp < VideoManager.config.cacheTime)) {
+                return this.data;
+            }
+            
+            // Check localStorage
+            try {
+                const stored = localStorage.getItem('videos_cache');
+                if (stored) {
+                    const parsed = JSON.parse(stored);
+                    if (Date.now() - parsed.timestamp < VideoManager.config.cacheTime) {
+                        this.data = parsed.data;
+                        this.timestamp = parsed.timestamp;
+                        return parsed.data;
+                    }
+                }
+            } catch (e) {
+                console.warn('Failed to retrieve cache:', e);
+            }
+            
+            return null;
+        },
+        
+        clear() {
+            this.data = null;
+            this.timestamp = null;
+            try {
+                localStorage.removeItem('videos_cache');
+            } catch (e) {
+                console.warn('Failed to clear cache:', e);
+            }
+        }
+    },
+    
+    // Initialize
+    async init() {
+        await this.loadVideos();
+        this.setupEventListeners();
+    },
+    
+    // Load videos with retry logic
+    async loadVideos(forceRefresh = false) {
+        const container = document.getElementById('videosGrid');
+        const loading = document.getElementById('videosLoading');
+        
+        // Check cache first
+        if (!forceRefresh) {
+            const cached = this.cache.get();
+            if (cached) {
+                this.renderVideos(cached);
+                loading.style.display = 'none';
+                container.style.display = 'grid';
+                return;
+            }
+        }
+        
+        // Show loading state
+        loading.style.display = 'block';
+        container.style.display = 'none';
+        
+        let retries = 0;
+        while (retries < this.config.maxRetries) {
+            try {
+                const response = await fetch(`${this.config.scriptUrl}?action=getVideos`);
+                const result = await response.json();
+                
+                if (result.success) {
+                    this.cache.set(result.data);
+                    this.renderVideos(result.data);
+                    loading.style.display = 'none';
+                    container.style.display = 'grid';
+                    return;
+                } else {
+                    throw new Error(result.error || 'Failed to load videos');
+                }
+            } catch (error) {
+                console.error(`Attempt ${retries + 1} failed:`, error);
+                retries++;
+                
+                if (retries < this.config.maxRetries) {
+                    await this.delay(this.config.retryDelay * retries);
+                } else {
+                    this.showError(error.message);
+                    loading.style.display = 'none';
+                }
+            }
+        }
+    },
+    
+    // Render videos to DOM
+    renderVideos(videos) {
+        const container = document.getElementById('videosGrid');
+        container.innerHTML = '';
+        
+        videos.forEach((video, index) => {
+            const videoCard = this.createVideoCard(video, index);
+            container.appendChild(videoCard);
+        });
+        
+        // Animate cards on load
+        this.animateCards();
+    },
+    
+    // Create video card element
+    createVideoCard(video, index) {
+        const card = document.createElement('div');
+        card.className = `video-card ${video.isLocked === 'TRUE' ? 'locked' : ''}`;
+        card.dataset.videoId = video.videoId;
+        card.dataset.locked = video.isLocked;
+        card.dataset.index = index;
+        
+        card.innerHTML = `
+            <div class="video-thumbnail">
+                ${video.isLocked === 'TRUE' ? '<div class="video-lock-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>' : ''}
+                <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                <div class="video-duration">${video.duration}</div>
+            </div>
+            <div class="video-info">
+                <h4>${video.title}</h4>
+                <div class="video-stats">
+                    <span><i class="fas fa-eye"></i> ${video.views} lượt xem</span>
+                    <span><i class="fas fa-calendar"></i> ${video.date}</span>
+                </div>
+            </div>
+        `;
+        
+        // Add click handler
+        card.addEventListener('click', () => this.handleVideoClick(video));
+        
+        return card;
+    },
+    
+    // Handle video click
+    async handleVideoClick(video) {
+        if (video.isLocked === 'TRUE') {
+            await this.showLockPopup();
+        } else if (video.videoUrl) {
+            window.open(video.videoUrl, '_blank');
+        }
+    },
+    
+    // Show lock popup with content from sheet
+    async showLockPopup() {
+        const popup = document.getElementById('videoLockPopup');
+        
+        try {
+            // Fetch popup content
+            const response = await fetch(`${this.config.scriptUrl}?action=getPopupContent`);
+            const result = await response.json();
+            
+            if (result.success) {
+                const data = result.data;
+                document.getElementById('lockPopupTitle').textContent = data.title;
+                document.getElementById('lockPopupMessage').textContent = data.message;
+                document.getElementById('lockPopupButtonText').textContent = data.buttonText;
+                document.getElementById('lockPopupButton').href = data.buttonLink;
+            }
+        } catch (error) {
+            console.error('Failed to load popup content:', error);
+            // Use default content if fetch fails
+        }
+        
+        popup.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    },
+    
+    // Setup event listeners
+    setupEventListeners() {
+        // Close popup on overlay click
+        document.querySelector('.lock-popup-overlay')?.addEventListener('click', () => {
+            this.closeVideoLockPopup();
+        });
+        
+        // Refresh button if exists
+        document.getElementById('refreshVideos')?.addEventListener('click', () => {
+            this.loadVideos(true);
+        });
+    },
+    
+    // Close lock popup
+    closeVideoLockPopup() {
+        const popup = document.getElementById('videoLockPopup');
+        popup.classList.remove('active');
+        document.body.style.overflow = '';
+    },
+    
+    // Show error state
+    showError(message) {
+        const container = document.getElementById('videosGrid');
+        container.innerHTML = `
+            <div class="videos-error">
+                <i class="fas fa-exclamation-triangle"></i>
+                <p>Không thể tải video. Vui lòng thử lại sau.</p>
+                <button class="retry-button" onclick="VideoManager.loadVideos(true)">
+                    <i class="fas fa-redo"></i> Thử lại
+                </button>
+            </div>
+        `;
+        container.style.display = 'block';
+    },
+    
+    // Animate cards on load
+    animateCards() {
+        const cards = document.querySelectorAll('.video-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                card.style.transition = 'all 0.5s ease';
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 50);
+        });
+    },
+    
+    // Utility: delay function
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+};
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    VideoManager.init();
+});
+
+// Export for global access
+window.VideoManager = VideoManager;
+window.closeVideoLockPopup = () => VideoManager.closeVideoLockPopup();
+
+
+// Lazy loading for images
+const lazyLoadImages = () => {
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.classList.add('loaded');
+                observer.unobserve(img);
+            }
+        });
+    });
+
+    document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+    });
+};
+
+// Preload next batch of videos
+const preloadNextBatch = () => {
+    // Implement pagination if needed
+};
+
+// Service Worker for offline support (optional)
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(err => {
+        console.log('Service Worker registration failed:', err);
+    });
+}

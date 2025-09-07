@@ -643,6 +643,259 @@ window.KOLInvest = {
         });
 
 // Video Manager Module
+// const VideoManager = {
+//     // Configuration
+//     config: {
+//         scriptUrl: 'https://script.google.com/macros/s/AKfycbxiKbwl277YKSIN0K_GRMIRROqdut_JPn6Pq0eOpZQDWS496MhNYzD6c0RNHAPHvKxH/exec',
+//         cacheTime: 5 * 60 * 1000, // 5 minutes
+//         maxRetries: 3,
+//         retryDelay: 1000
+//     },
+    
+//     // Cache management
+//     cache: {
+//         data: null,
+//         timestamp: null,
+        
+//         set(data) {
+//             this.data = data;
+//             this.timestamp = Date.now();
+//             // Store in localStorage for persistence
+//             try {
+//                 localStorage.setItem('videos_cache', JSON.stringify({
+//                     data: data,
+//                     timestamp: this.timestamp
+//                 }));
+//             } catch (e) {
+//                 console.warn('Failed to cache videos:', e);
+//             }
+//         },
+        
+//         get() {
+//             // Check memory cache first
+//             if (this.data && this.timestamp && 
+//                 (Date.now() - this.timestamp < VideoManager.config.cacheTime)) {
+//                 return this.data;
+//             }
+            
+//             // Check localStorage
+//             try {
+//                 const stored = localStorage.getItem('videos_cache');
+//                 if (stored) {
+//                     const parsed = JSON.parse(stored);
+//                     if (Date.now() - parsed.timestamp < VideoManager.config.cacheTime) {
+//                         this.data = parsed.data;
+//                         this.timestamp = parsed.timestamp;
+//                         return parsed.data;
+//                     }
+//                 }
+//             } catch (e) {
+//                 console.warn('Failed to retrieve cache:', e);
+//             }
+            
+//             return null;
+//         },
+        
+//         clear() {
+//             this.data = null;
+//             this.timestamp = null;
+//             try {
+//                 localStorage.removeItem('videos_cache');
+//             } catch (e) {
+//                 console.warn('Failed to clear cache:', e);
+//             }
+//         }
+//     },
+    
+//     // Initialize
+//     async init() {
+//         await this.loadVideos();
+//         this.setupEventListeners();
+//     },
+    
+//     // Load videos with retry logic
+//     async loadVideos(forceRefresh = false) {
+//         const container = document.getElementById('videosGrid');
+//         const loading = document.getElementById('videosLoading');
+        
+//         // Check cache first
+//         if (!forceRefresh) {
+//             const cached = this.cache.get();
+//             if (cached) {
+//                 this.renderVideos(cached);
+//                 loading.style.display = 'none';
+//                 container.style.display = 'grid';
+//                 return;
+//             }
+//         }
+        
+//         // Show loading state
+//         loading.style.display = 'block';
+//         container.style.display = 'none';
+        
+//         let retries = 0;
+//         while (retries < this.config.maxRetries) {
+//             try {
+//                 const response = await fetch(`${this.config.scriptUrl}?action=getVideos`);
+//                 const result = await response.json();
+                
+//                 if (result.success) {
+//                     this.cache.set(result.data);
+//                     this.renderVideos(result.data);
+//                     loading.style.display = 'none';
+//                     container.style.display = 'grid';
+//                     return;
+//                 } else {
+//                     throw new Error(result.error || 'Failed to load videos');
+//                 }
+//             } catch (error) {
+//                 console.error(`Attempt ${retries + 1} failed:`, error);
+//                 retries++;
+                
+//                 if (retries < this.config.maxRetries) {
+//                     await this.delay(this.config.retryDelay * retries);
+//                 } else {
+//                     this.showError(error.message);
+//                     loading.style.display = 'none';
+//                 }
+//             }
+//         }
+//     },
+    
+//     // Render videos to DOM
+//     renderVideos(videos) {
+//         const container = document.getElementById('videosGrid');
+//         container.innerHTML = '';
+        
+//         videos.forEach((video, index) => {
+//             const videoCard = this.createVideoCard(video, index);
+//             container.appendChild(videoCard);
+//         });
+        
+//         // Animate cards on load
+//         this.animateCards();
+//     },
+    
+//     // Create video card element
+//     createVideoCard(video, index) {
+//         const card = document.createElement('div');
+//         card.className = `video-card ${video.isLocked === 'TRUE' ? 'locked' : ''}`;
+//         card.dataset.videoId = video.videoId;
+//         card.dataset.locked = video.isLocked;
+//         card.dataset.index = index;
+        
+//         card.innerHTML = `
+//             <div class="video-thumbnail">
+//                 ${video.isLocked === 'TRUE' ? '<div class="video-lock-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>' : ''}
+//                 <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+//                 <div class="video-duration">${video.duration}</div>
+//             </div>
+//             <div class="video-info">
+//                 <h4>${video.title}</h4>
+//                 <div class="video-stats">
+//                     <span><i class="fas fa-eye"></i> ${video.views} lượt xem</span>
+//                     <span><i class="fas fa-calendar"></i> ${video.date}</span>
+//                 </div>
+//             </div>
+//         `;
+        
+//         // Add click handler
+//         card.addEventListener('click', () => this.handleVideoClick(video));
+        
+//         return card;
+//     },
+    
+//     // Handle video click
+//     async handleVideoClick(video) {
+//         if (video.isLocked === 'TRUE') {
+//             await this.showLockPopup();
+//         } else if (video.videoUrl) {
+//             window.open(video.videoUrl, '_blank');
+//         }
+//     },
+    
+//     // Show lock popup with content from sheet
+//     async showLockPopup() {
+//         const popup = document.getElementById('videoLockPopup');
+        
+//         try {
+//             // Fetch popup content
+//             const response = await fetch(`${this.config.scriptUrl}?action=getPopupContent`);
+//             const result = await response.json();
+            
+//             if (result.success) {
+//                 const data = result.data;
+//                 document.getElementById('lockPopupTitle').textContent = data.title;
+//                 document.getElementById('lockPopupMessage').textContent = data.message;
+//                 document.getElementById('lockPopupButtonText').textContent = data.buttonText;
+//                 document.getElementById('lockPopupButton').href = data.buttonLink;
+//             }
+//         } catch (error) {
+//             console.error('Failed to load popup content:', error);
+//             // Use default content if fetch fails
+//         }
+        
+//         popup.classList.add('active');
+//         document.body.style.overflow = 'hidden';
+//     },
+    
+//     // Setup event listeners
+//     setupEventListeners() {
+//         // Close popup on overlay click
+//         document.querySelector('.lock-popup-overlay')?.addEventListener('click', () => {
+//             this.closeVideoLockPopup();
+//         });
+        
+//         // Refresh button if exists
+//         document.getElementById('refreshVideos')?.addEventListener('click', () => {
+//             this.loadVideos(true);
+//         });
+//     },
+    
+//     // Close lock popup
+//     closeVideoLockPopup() {
+//         const popup = document.getElementById('videoLockPopup');
+//         popup.classList.remove('active');
+//         document.body.style.overflow = '';
+//     },
+    
+//     // Show error state
+//     showError(message) {
+//         const container = document.getElementById('videosGrid');
+//         container.innerHTML = `
+//             <div class="videos-error">
+//                 <i class="fas fa-exclamation-triangle"></i>
+//                 <p>Không thể tải video. Vui lòng thử lại sau.</p>
+//                 <button class="retry-button" onclick="VideoManager.loadVideos(true)">
+//                     <i class="fas fa-redo"></i> Thử lại
+//                 </button>
+//             </div>
+//         `;
+//         container.style.display = 'block';
+//     },
+    
+//     // Animate cards on load
+//     animateCards() {
+//         const cards = document.querySelectorAll('.video-card');
+//         cards.forEach((card, index) => {
+//             card.style.opacity = '0';
+//             card.style.transform = 'translateY(20px)';
+            
+//             setTimeout(() => {
+//                 card.style.transition = 'all 0.5s ease';
+//                 card.style.opacity = '1';
+//                 card.style.transform = 'translateY(0)';
+//             }, index * 50);
+//         });
+//     },
+    
+//     // Utility: delay function
+//     delay(ms) {
+//         return new Promise(resolve => setTimeout(resolve, ms));
+//     }
+// };
+
+// Video Manager Module - Phiên bản cập nhật
 const VideoManager = {
     // Configuration
     config: {
@@ -652,7 +905,30 @@ const VideoManager = {
         retryDelay: 1000
     },
     
-    // Cache management
+    // Popup content configuration - Định nghĩa sẵn trong code
+    popupContent: {
+        default: {
+            title: 'Video Premium - Dành riêng cho cộng đồng DDF',
+            message: 'Video này chỉ dành cho thành viên cộng động DDF. Tham gia group cộng đồng DDF để tham gia các phiên livestream nội bộ cùng Doãn Đức Official',
+            buttonText: 'Tham gia room cộng đồng DDF',
+            buttonAction: 'register' // 'register' hoặc 'link'
+        },
+        vip: {
+            title: 'Nội dung VIP',
+            message: 'Đây là nội dung độc quyền dành cho thành viên VIP. Tham gia ngay để không bỏ lỡ những phân tích chuyên sâu từ Doãn Đức.',
+            buttonText: 'Tham gia VIP',
+            buttonAction: 'register'
+        },
+        community: {
+            title: 'Video cộng đồng DDF',
+            message: 'Video này dành cho thành viên trong room cộng đồng DDF. Tham gia room để nhận khuyến nghị miễn phí hàng ngày.',
+            buttonText: 'Tham gia cộng đồng',
+            buttonAction: 'link',
+            buttonLink: 'https://zalo.me/g/dpzjrr619'
+        }
+    },
+    
+    // Cache management (giữ nguyên)
     cache: {
         data: null,
         timestamp: null,
@@ -660,7 +936,6 @@ const VideoManager = {
         set(data) {
             this.data = data;
             this.timestamp = Date.now();
-            // Store in localStorage for persistence
             try {
                 localStorage.setItem('videos_cache', JSON.stringify({
                     data: data,
@@ -672,13 +947,11 @@ const VideoManager = {
         },
         
         get() {
-            // Check memory cache first
             if (this.data && this.timestamp && 
                 (Date.now() - this.timestamp < VideoManager.config.cacheTime)) {
                 return this.data;
             }
             
-            // Check localStorage
             try {
                 const stored = localStorage.getItem('videos_cache');
                 if (stored) {
@@ -713,12 +986,11 @@ const VideoManager = {
         this.setupEventListeners();
     },
     
-    // Load videos with retry logic
+    // Load videos with retry logic (giữ nguyên)
     async loadVideos(forceRefresh = false) {
         const container = document.getElementById('videosGrid');
         const loading = document.getElementById('videosLoading');
         
-        // Check cache first
         if (!forceRefresh) {
             const cached = this.cache.get();
             if (cached) {
@@ -729,7 +1001,6 @@ const VideoManager = {
             }
         }
         
-        // Show loading state
         loading.style.display = 'block';
         container.style.display = 'none';
         
@@ -762,7 +1033,7 @@ const VideoManager = {
         }
     },
     
-    // Render videos to DOM
+    // Render videos to DOM (giữ nguyên)
     renderVideos(videos) {
         const container = document.getElementById('videosGrid');
         container.innerHTML = '';
@@ -772,21 +1043,21 @@ const VideoManager = {
             container.appendChild(videoCard);
         });
         
-        // Animate cards on load
         this.animateCards();
     },
     
-    // Create video card element
+    // Create video card element - Cập nhật để thêm lockType
     createVideoCard(video, index) {
         const card = document.createElement('div');
         card.className = `video-card ${video.isLocked === 'TRUE' ? 'locked' : ''}`;
         card.dataset.videoId = video.videoId;
         card.dataset.locked = video.isLocked;
+        card.dataset.lockType = video.lockType || 'default'; // Thêm lockType
         card.dataset.index = index;
         
         card.innerHTML = `
             <div class="video-thumbnail">
-                ${video.isLocked === 'TRUE' ? '<div class="video-lock-icon"><i class="fa-solid fa-arrow-trend-up"></i></div>' : ''}
+                ${video.isLocked === 'TRUE' ? '<div class="video-lock-icon"><i class="fas fa-lock"></i></div>' : ''}
                 <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
                 <div class="video-duration">${video.duration}</div>
             </div>
@@ -799,57 +1070,94 @@ const VideoManager = {
             </div>
         `;
         
-        // Add click handler
         card.addEventListener('click', () => this.handleVideoClick(video));
         
         return card;
     },
     
-    // Handle video click
-    async handleVideoClick(video) {
+    // Handle video click - Cập nhật
+    handleVideoClick(video) {
         if (video.isLocked === 'TRUE') {
-            await this.showLockPopup();
+            // Lấy lockType từ video data hoặc dùng default
+            const lockType = video.lockType || 'community';
+            this.showLockPopup(lockType);
         } else if (video.videoUrl) {
             window.open(video.videoUrl, '_blank');
         }
     },
     
-    // Show lock popup with content from sheet
-    async showLockPopup() {
+    // Show lock popup - KHÔNG CẦN FETCH từ Google Sheet nữa
+    showLockPopup(lockType = 'community') {
         const popup = document.getElementById('videoLockPopup');
         
-        try {
-            // Fetch popup content
-            const response = await fetch(`${this.config.scriptUrl}?action=getPopupContent`);
-            const result = await response.json();
-            
-            if (result.success) {
-                const data = result.data;
-                document.getElementById('lockPopupTitle').textContent = data.title;
-                document.getElementById('lockPopupMessage').textContent = data.message;
-                document.getElementById('lockPopupButtonText').textContent = data.buttonText;
-                document.getElementById('lockPopupButton').href = data.buttonLink;
-            }
-        } catch (error) {
-            console.error('Failed to load popup content:', error);
-            // Use default content if fetch fails
+        // Lấy content từ object đã định nghĩa sẵn
+        const content = this.popupContent[lockType] || this.popupContent.community;
+        
+        // Update nội dung popup
+        document.getElementById('lockPopupTitle').textContent = content.title;
+        document.getElementById('lockPopupMessage').textContent = content.message;
+        document.getElementById('lockPopupButtonText').textContent = content.buttonText;
+        
+        // Xử lý button action
+        const button = document.getElementById('lockPopupButton');
+        
+        if (content.buttonAction === 'register') {
+            // Mở form đăng ký
+            button.href = 'javascript:void(0)';
+            button.onclick = () => {
+                this.closeVideoLockPopup();
+                openPopup(); // Gọi function mở popup form đăng ký
+            };
+        } else if (content.buttonAction === 'link' && content.buttonLink) {
+            // Chuyển đến link external
+            button.href = content.buttonLink;
+            button.target = '_blank';
+            button.onclick = () => {
+                this.closeVideoLockPopup();
+            };
         }
         
+        // Hiển thị popup
         popup.classList.add('active');
         document.body.style.overflow = 'hidden';
+        
+        // Thêm animation cho popup
+        this.animatePopup();
+    },
+    
+    // Thêm animation cho popup
+    animatePopup() {
+        const popupContent = document.querySelector('.lock-popup-content');
+        popupContent.style.animation = 'none';
+        setTimeout(() => {
+            popupContent.style.animation = 'popupSlideIn 0.3s ease';
+        }, 10);
     },
     
     // Setup event listeners
     setupEventListeners() {
         // Close popup on overlay click
-        document.querySelector('.lock-popup-overlay')?.addEventListener('click', () => {
-            this.closeVideoLockPopup();
+        const overlay = document.querySelector('.lock-popup-overlay');
+        if (overlay) {
+            overlay.addEventListener('click', () => {
+                this.closeVideoLockPopup();
+            });
+        }
+        
+        // Close with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('videoLockPopup').classList.contains('active')) {
+                this.closeVideoLockPopup();
+            }
         });
         
         // Refresh button if exists
-        document.getElementById('refreshVideos')?.addEventListener('click', () => {
-            this.loadVideos(true);
-        });
+        const refreshBtn = document.getElementById('refreshVideos');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
+                this.loadVideos(true);
+            });
+        }
     },
     
     // Close lock popup
@@ -859,7 +1167,7 @@ const VideoManager = {
         document.body.style.overflow = '';
     },
     
-    // Show error state
+    // Show error state (giữ nguyên)
     showError(message) {
         const container = document.getElementById('videosGrid');
         container.innerHTML = `
@@ -874,7 +1182,7 @@ const VideoManager = {
         container.style.display = 'block';
     },
     
-    // Animate cards on load
+    // Animate cards on load (giữ nguyên)
     animateCards() {
         const cards = document.querySelectorAll('.video-card');
         cards.forEach((card, index) => {
@@ -892,8 +1200,25 @@ const VideoManager = {
     // Utility: delay function
     delay(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
+    },
+    
+    // Thêm method để thay đổi nội dung popup động nếu cần
+    updatePopupContent(type, customContent) {
+        if (customContent) {
+            this.popupContent[type] = { ...this.popupContent[type], ...customContent };
+        }
     }
 };
+
+// Initialize when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    VideoManager.init();
+});
+
+// Export for global access
+window.VideoManager = VideoManager;
+window.closeVideoLockPopup = () => VideoManager.closeVideoLockPopup();
+
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {

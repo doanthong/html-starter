@@ -128,7 +128,7 @@
                         <div class="about-stats">
                             <div class="stat-item">
                                 <i class="fa-solid fa-briefcase"></i>
-                                <span>Giám đốc khối tư vấn đầu tư khu vực miền Nam công ty chứng khoán VPS</span>
+                                <span>Giám đốc tư vấn đầu tư quản lý khu vực miền Nam - Công ty cổ phần chứng khoán VPS</span>
                             </div>
                             <div class="stat-item">
                                 <i class="fas fa-calendar-alt"></i>
@@ -459,11 +459,11 @@
                     <p>Chỉ cần một bước – bạn sẽ không còn đi một mình trên thị trường chứng khoán.</p>
 
                     <div class="final-cta-buttons">
-                        <a class="btn btn-primary btn-xl" onclick="openPopup()">
+                        <a class="btn btn-primary" onclick="openPopup()">
                             <i class="fas fa-graduation-cap"></i>
                             Đăng ký khóa học ngay
                         </a>
-                        <a href="#account" class="btn btn-secondary btn-xl">
+                        <a href="#account" class="btn btn-secondary">
                             <i class="fas fa-chart-line"></i>
                             Mở tài khoản chứng khoán
                         </a>
@@ -590,6 +590,26 @@
             <button class="error-btn" onclick="closeErrorPopup()">Thử lại</button>
         </div>
     </div>
+
+    <!-- Video Lock Popup -->
+<div class="video-lock-popup" id="videoLockPopup">
+    <div class="lock-popup-overlay"></div>
+    <div class="lock-popup-content">
+        <button class="lock-popup-close" onclick="closeVideoLockPopup()">
+            <i class="fas fa-times"></i>
+        </button>
+        <div class="lock-icon">
+            <i class="fas fa-lock"></i>
+        </div>
+        <!-- Content cố định trong HTML -->
+        <h3 id="lockPopupTitle">Video Premium</h3>
+        <p id="lockPopupMessage">Video này chỉ dành cho thành viên cộng động DDF. Tham gia group cộng đồng DDF để tham gia các phiên livestream nội bộ cùng Doãn Đức Official</p>
+        <a href="https://zalo.me/g/dpzjrr619" id="lockPopupButton" class="btn btn-primary" onclick="closeVideoLockPopup(); openPopup();">
+            <span id="lockPopupButtonText">Đăng ký khóa học ngay</span>
+        </a>
+    </div>
+</div>
+
 
     <!-- Footer -->
     <footer class="footer">

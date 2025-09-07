@@ -53,6 +53,7 @@ h6 {
 
 /* Buttons */
 .btn {
+    width: 300px;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -1808,7 +1809,7 @@ h6 {
 
 .video-card.locked::before {
     content: '';
-    position: absolute;
+    /* position: absolute; */
     top: 0;
     left: 0;
     right: 0;
